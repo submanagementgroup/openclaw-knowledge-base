@@ -33,6 +33,7 @@ Key fields:
 | `agentRuntime` | `embedded-pi` | Runtime mode |
 | `heartbeat.every` | `30m` | Heartbeat cadence |
 | `compaction.enabled` | true | Auto-compact long sessions |
+| `compaction.midTurnPrecheck.enabled` | false | Opt-in tool-loop pressure check; aborts and recovers mid-turn if context no longer fits |
 | `sandbox` | off | Sandbox mode for tool execution |
 | `timeoutSeconds` | 172800 | Max agent run time (48h) |
 

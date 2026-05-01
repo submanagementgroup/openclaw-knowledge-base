@@ -20,7 +20,9 @@ QA channel for OpenClaw automated testing.
 - Slack-class target grammar:
   - `dm:<user>`
   - `channel:<room>`
+  - `group:<room>`
   - `thread:<room>/<thread>`
+- Shared `channel:` and `group:` conversations are surfaced to agents as group/channel room turns, so they exercise the same visible-reply and message-tool routing policy used by Discord, Slack, Telegram, and similar transports.
 - HTTP-backed synthetic bus for inbound message injection, outbound transcript capture, thread creation, reactions, edits, deletes, and search/read actions.
 - Host-side self-check runner that writes a Markdown report to `.artifacts/qa-e2e/`.
 

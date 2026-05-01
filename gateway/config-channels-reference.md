@@ -72,6 +72,8 @@ Channel configuration lives under the `channels` top-level key. Each channel nam
 }
 ```
 
+The gateway hot-reloads `messages` config after the file is saved. Restart only when file watching or config reload is disabled in the deployment.
+
 Per-channel configuration keys under `channels.*`. Covers DM and group access,
 multi-account setups, mention gating, and per-channel keys for Slack, Discord,
 Telegram, WhatsApp, Matrix, iMessage, and the other bundled channel plugins.

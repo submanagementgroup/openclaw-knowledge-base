@@ -9,6 +9,8 @@ keywords:
   - token limits
   - agents.defaults.compaction
   - auto-compact
+  - midTurnPrecheck
+  - mid-turn precheck
 related:
   - concepts/session
   - concepts/context-engine
@@ -99,6 +101,12 @@ When unset, compaction uses the agent's primary model.
 ### Identifier preservation
 
 Compaction summarization preserves opaque identifiers by default (`identifierPolicy: "strict"`). Override with `identifierPolicy: "off"` to disable, or `identifierPolicy: "custom"` plus `identifierInstructions` for custom guidance.
+
+### Mid-turn precheck (`midTurnPrecheck`)
+
+Set `agents.defaults.compaction.midTurnPrecheck.enabled: true` to add an opt-in tool-loop guard for embedded Pi runs. After a tool result is appended and before the next model call, OpenClaw estimates the prompt pressure using the same preflight budget logic used at turn start. If the context no longer fits, the guard does not compact inside Pi's `transformContext` hook — it raises a structured mid-turn precheck signal, stops the current prompt submission, and lets the outer run loop use the existing recovery path: truncate oversized tool results when that is enough, or trigger the configured compaction mode and retry. Works with both `default` and `safeguard` compaction modes. Default: disabled.
+
+This is independent of `maxActiveTranscriptBytes`: the byte-size guard runs before a turn opens, while `midTurnPrecheck` runs later in the embedded Pi tool loop after new tool results have been appended.
 
 ### Active transcript byte guard
 

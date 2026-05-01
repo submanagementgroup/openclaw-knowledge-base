@@ -10,6 +10,7 @@ keywords:
   - botToken
   - Slack channel
   - Slack threading
+  - allowBots
 related:
   - channels/discord
   - channels/msteams
@@ -45,6 +46,10 @@ Production-ready for DMs and channels via Slack app integrations. Default mode i
     Native command behavior and command catalog.
 
     Cross-channel diagnostics and repair playbooks.
+
+## allowBots Behavior for Channels and Private Channels
+
+`allowBots` is conservative for channels and private channels: bot-authored room messages are accepted only when the sending bot is explicitly listed in that room's `users` allowlist, or when at least one explicit Slack owner ID from `channels.slack.allowFrom` is currently a room member. Wildcards and display-name owner entries do not satisfy owner presence. Owner presence uses Slack `conversations.members`; make sure the app has the matching read scope for the room type (`channels:read` for public channels, `groups:read` for private channels). If the member lookup fails, OpenClaw drops the bot-authored room message.
 
 ## Quick setup
 

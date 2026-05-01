@@ -10,6 +10,9 @@ keywords:
   - Telegram channel
   - allowFrom
   - Telegram groups
+  - timeoutSeconds
+  - pollingStallThresholdMs
+  - long polling
 related:
   - channels/whatsapp
   - channels/discord
@@ -206,3 +209,12 @@ curl "https://api.telegram.org/bot<bot_token>/getUpdates"
       - Put negative Telegram group or supergroup chat IDs like `-1001234567890` under `channels.telegram.groups`.
       - Put Telegram user IDs like `8734062810` under `groupAllowFrom` when you want to limit which people inside an allowed group can trigger the bot.
       - Use `groupAllowFrom: ["*"]` only when you want any member of an allowed group to be able to
+
+
+## Polling timeout and troubleshooting
+
+`channels.telegram.timeoutSeconds` overrides the Telegram API client timeout. Long-polling bot clients clamp configured values below the 45-second `getUpdates` request guard so idle polls are not aborted before the 30-second poll window completes.
+
+If Telegram sockets recycle on a short fixed cadence, check for a low `channels.telegram.timeoutSeconds`: long-polling bot clients clamp configured values below the `getUpdates` request guard, but older releases could abort every poll when this was set below the long-poll timeout.
+
+`channels.telegram.pollingStallThresholdMs` defaults to `120000`. Increase only when long-running `getUpdates` calls are healthy but your host still reports false polling-stall restarts. Persistent stalls usually point to proxy, DNS, IPv6, or TLS egress issues between the host and `api.telegram.org`.

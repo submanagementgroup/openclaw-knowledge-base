@@ -26,7 +26,7 @@ Rebuild date: April 30, 2026.
 | `gateway/` | 23 | Gateway service: configuration, security, secrets, sandboxing, protocols, APIs, and CLI backends |
 | `getting-started/` | 7 | Quickstart, installation, onboarding wizard, workspace bootstrap, and CLI automation |
 | `install/` | 14 | Platform-specific installation: Docker, Kubernetes, cloud VPS, Nix, and package managers |
-| `internals/` | 6 | Internals: Pi integration, CI pipeline, QA automation, design plans, and release process |
+| `internals/` | 9 | Internals: Pi integration, CI pipeline (4 files), QA automation, design plans, and release process |
 | `memory/` | 7 | Memory system: search, QMD engine, active memory, LanceDB, and memory wiki |
 | `nodes/` | 6 | iOS, Android, and macOS nodes: camera, audio, voice wake, media, location, troubleshooting |
 | `platforms/` | 10 | Platform-specific guides: macOS app, iOS, Android, Linux, Windows, VPS, DigitalOcean, Oracle |
@@ -291,7 +291,10 @@ Rebuild date: April 30, 2026.
 | `install/raspberry-pi.md` | procedure | Raspberry Pi Installation: ARM Setup and macOS VM |
 | `install/updating.md` | procedure | Updating and Uninstalling OpenClaw: Update Methods and Clean Removal |
 | `install/vps-hosting.md` | procedure | VPS Hosting: Running OpenClaw on Linux Servers and Cloud VPS Providers |
-| `internals/ci-pipeline.md` | reference | CI Pipeline: Job Graph, Scope Gates, Runners, and Local Equivalents |
+| `internals/ci-pipeline-overview.md` | reference | CI Pipeline Overview: Job Graph, Fail-Fast, Scope Routing, Runners, Local Equivalents |
+| `internals/ci-release-workflows.md` | reference | CI Release Workflows: Full Release Validation, Live/E2E Shards, Install Smoke, Plugin Prerelease, QA Lab |
+| `internals/ci-package-acceptance.md` | reference | CI Package Acceptance Workflow: Suite Profiles, Candidate Sources, Legacy Compat |
+| `internals/ci-codeql-maintenance.md` | reference | CI CodeQL, Maintenance Workflows, Local Gates, and Testbox |
 | `internals/design-plans.md` | reference | Design Plans: Codex Context Engine Harness and UI Channels Architecture |
 | `internals/pi-integration.md` | reference | Pi Agent Integration: Architecture, Session Lifecycle, and Development Workflow |
 | `internals/qa-automation.md` | reference | QA and E2E Automation: Test Framework, Test Matrix, and CI Integration |

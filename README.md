@@ -6,9 +6,10 @@ Structured knowledge base for the OpenClaw memory search system (`memory_search`
 
 | Field | Value |
 |-------|-------|
-| **Rebuild date** | April 30, 2026 |
-| **Source files processed** | 533 `.md` files across 23 source directories |
-| **Output KB files** | 347 content files + 20 index files = **367 total** |
+| **Last update** | May 1, 2026 (delta v2026.4.27 → v2026.4.29) |
+| **Source version** | OpenClaw v2026.4.29 |
+| **Source files processed** | 478 `.md` files across 23 source directories |
+| **Output KB files** | 339 content files + 20 index files = **359 total** |
 | **Domains** | 18 |
 | **Source excluded** | `assets/`, `images/`, `snippets/` (binary/empty), `.generated/`, `.i18n/` |
 
@@ -23,7 +24,7 @@ Structured knowledge base for the OpenClaw memory search system (`memory_search`
 | `gateway/` | 23 | Gateway service: config, security, secrets, sandboxing, protocols, APIs, CLI backends |
 | `getting-started/` | 7 | Quickstart, installation, onboarding wizard, workspace bootstrap, CLI automation |
 | `install/` | 14 | Platform-specific install: Docker, Kubernetes, cloud VPS, Nix, package managers |
-| `internals/` | 6 | Pi integration, CI pipeline, QA automation, design plans, release process |
+| `internals/` | 9 | Pi integration, CI pipeline (4 files), QA automation, design plans, release process |
 | `memory/` | 7 | Memory system: search, QMD engine, active memory, LanceDB, memory wiki |
 | `nodes/` | 6 | iOS, Android, macOS nodes: camera, audio, voice wake, media, location, troubleshooting |
 | `platforms/` | 10 | macOS app, iOS, Android, Linux, Windows, Raspberry Pi, DigitalOcean, Oracle Cloud |

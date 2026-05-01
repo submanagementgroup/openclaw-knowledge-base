@@ -7,6 +7,9 @@ keywords:
   - QQBot
   - Tencent QQ
   - channel setup
+  - /bot-me
+  - admin commands
+  - allowFrom
 related:
   - channels/channel-routing
   - gateway/configuration-overview
@@ -226,6 +229,21 @@ Outbound audio upload/transcode behavior can also be tuned with
 - `sttDirectFormats`
 - `uploadDirectFormats`
 - `transcodeEnabled`
+
+## Admin slash commands
+
+Built-in slash commands are intercepted before the AI queue. Key commands:
+
+| Command        | Description |
+| -------------- | ----------- |
+| `/bot-me`      | Show the sender's QQ user ID (openid) for `allowFrom`/`groupAllowFrom` setup |
+| `/bot-upgrade` | Show the QQBot upgrade guide link |
+| `/bot-logs`    | Export recent gateway logs as a file |
+| `/bot-approve` | Approve a pending QQ Bot action through the native flow |
+| `/bot-ping`    | Latency test |
+| `/bot-help`    | List all commands |
+
+Admin commands (`/bot-me`, `/bot-upgrade`, `/bot-logs`, `/bot-clear-storage`, `/bot-streaming`, `/bot-approve`) are direct-message-only and require the sender's openid in an explicit non-wildcard `allowFrom` list. A wildcard `allowFrom: ["*"]` permits chat but does not grant admin command access. Group messages match against `groupAllowFrom` first and fall back to `allowFrom`. Running an admin command in a group returns a hint rather than silently dropping.
 
 ## Target formats
 

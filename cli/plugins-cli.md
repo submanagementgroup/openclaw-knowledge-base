@@ -56,6 +56,11 @@ openclaw plugins deps --repair
 openclaw plugins deps --prune
 openclaw plugins deps --json
 openclaw plugins doctor
+```
+
+`plugins deps` inspects the packaged runtime dependency stage for OpenClaw-owned bundled plugins selected by plugin config, enabled/configured channels, configured model providers, or bundled manifest defaults. It is not the install/update path for third-party npm or ClawHub plugins. Use `--repair` when a packaged install reports missing bundled runtime dependencies during Gateway startup or `plugins doctor`. Repair installs only missing enabled bundled-plugin deps with lifecycle scripts disabled. Use `--prune` to remove stale unknown external runtime-dependency roots left behind by older packaged layouts.
+
+```bash
 openclaw plugins update <id-or-npm-spec>
 openclaw plugins update --all
 openclaw plugins marketplace list <marketplace>

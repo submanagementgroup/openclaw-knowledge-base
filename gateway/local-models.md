@@ -172,3 +172,9 @@ Swap the primary and fallback order; keep the same providers block and `models.m
 ### Regional hosting / data routing
 
 - Hosted MiniMax/Kimi/GLM variants a
+
+## Context Window Preflight Thresholds
+
+OpenClaw derives context-window preflight thresholds from the detected model window, or from the uncapped model window when `agents.defaults.contextTokens` lowers the effective window. Warnings trigger below 20% with an **8k** floor. Hard blocks use the 10% threshold with a **4k** floor, capped to the effective context window so oversized model metadata cannot reject an otherwise valid user cap.
+
+If you hit a context preflight block, raise the server/model context limit or choose a larger model. For memory pressure: lower `contextWindow` or raise your server limit.

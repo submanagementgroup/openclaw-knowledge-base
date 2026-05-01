@@ -41,6 +41,8 @@ We serialize inbound auto-reply runs (all channels) through a tiny in-process qu
 - `runEmbeddedPiAgent` enqueues by **session key** (lane `session:<key>`) to guarantee only one active run per session.
 - Each session run is then queued into a **global lane** (`main` by default) so overall parallelism is capped by `agents.defaults.maxConcurrent`.
 - When verbose logging is enabled, queued runs emit a short notice if they waited more than ~2s before starting.
+- Codex app-server runs that accept a turn and then stop emitting progress are interrupted by the Codex adapter so the active session lane can release instead of waiting for the outer run timeout.
+- When diagnostics are enabled, sessions that remain in `processing` past `diagnostics.stuckSessionWarnMs` log a stuck-session warning. Active embedded runs, active reply operations, and active lane tasks remain warning-only by default; stale startup bookkeeping with no active session work can release the affected session lane so queued work drains.
 - Typing indicators still fire immediately on enqueue (when supported by the channel) so user experience is unchanged while we wait our turn.
 
 ## Defaults

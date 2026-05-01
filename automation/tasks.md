@@ -122,7 +122,7 @@ Agent run completion is authoritative for active task records. A successful deta
 `lost` is runtime-aware:
 
 - ACP tasks: backing ACP child session metadata disappeared.
-- Subagent tasks: backing child session disappeared from the target agent store.
+- Subagent tasks: backing child session disappeared from the target agent store. Subagent tasks whose child session has a restart-recovery tombstone are marked `lost` instead of being treated as recoverable backing sessions.
 - Cron tasks: the cron runtime no longer tracks the job as active and durable
   cron run history does not show a terminal result for that run. Offline CLI
   audit does not treat its own empty in-process cron runtime state as authority.

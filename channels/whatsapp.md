@@ -10,6 +10,8 @@ keywords:
   - Baileys
   - WhatsApp Web
   - WhatsApp groups
+  - auto-reply delivery failed
+  - transcript delivery
 related:
   - channels/telegram
   - channels/signal
@@ -170,3 +172,11 @@ unless you explicitly opt in:
     whatsapp: {
       pluginHooks: {
         messageReceived: tr
+
+## Troubleshooting: Reply in Transcript but Not Delivered to WhatsApp
+
+Transcript rows record what the agent generated. WhatsApp delivery is confirmed separately: OpenClaw only treats an auto-reply as sent after Baileys returns an outbound message id for at least one visible text or media send.
+
+Ack reactions are independent pre-reply receipts. A successful reaction does not prove that the later text or media reply was accepted by WhatsApp.
+
+Check gateway logs for `auto-reply delivery failed` or `auto-reply was not accepted by WhatsApp provider`.

@@ -116,6 +116,7 @@ The macOS app can control a remote OpenClaw gateway over SSH. Configure in **Set
 - `exit 127 / not found`: `openclaw` not on PATH for non-login shells. Symlink into `/usr/local/bin` or `/opt/homebrew/bin`.
 - Web Chat stuck: confirm gateway is running on remote and forwarded port matches gateway WS port.
 - Node IP shows 127.0.0.1: expected with SSH tunnel. Switch to Direct (ws/wss) to see real client IP.
+- Dashboard works but Mac capabilities are offline: the app's operator/control connection is healthy, but the companion node connection is not connected or is missing its command surface. Open the menu bar device section and check whether the Mac is `paired · disconnected`. For `wss://*.ts.net` Tailscale Serve endpoints, the app detects stale legacy TLS leaf pins after certificate rotation, clears the stale pin when macOS trusts the new certificate, and retries automatically. If the certificate is not system-trusted or the host is not a Tailscale Serve name, review the certificate or switch to Remote over SSH.
 - Voice Wake: trigger phrases are forwarded automatically in remote mode; no separate forwarder needed.
 
 **Security:** Prefer loopback binds on remote host and connect via SSH or Tailscale. SSH tunneling uses strict host-key checking; trust the host key first.
