@@ -1,0 +1,163 @@
+---
+domain: providers
+topic: "fal.ai Image/Video Provider"
+type: integration
+keywords:
+  - fal.ai
+  - fal
+  - image generation
+  - video generation
+source: providers/fal.md
+---
+
+OpenClaw ships a bundled `fal` provider for hosted image and video generation.
+
+| Property | Value                                                         |
+| -------- | ------------------------------------------------------------- |
+| Provider | `fal`                                                         |
+| Auth     | `FAL_KEY` (canonical; `FAL_API_KEY` also works as a fallback) |
+| API      | fal model endpoints                                           |
+
+## Getting started
+
+**Set the API key**
+
+```bash
+    openclaw onboard --auth-choice fal-api-key
+    ```
+  
+**Set a default image model**
+
+```json5
+    {
+      agents: {
+        defaults: {
+          imageGenerationModel: {
+            primary: "fal/fal-ai/flux/dev",
+          },
+        },
+      },
+    }
+    ```
+  
+## Image generation
+
+The bundled `fal` image-generation provider defaults to
+`fal/fal-ai/flux/dev`.
+
+| Capability     | Value                                                       |
+| -------------- | ----------------------------------------------------------- |
+| Max images     | 4 per request                                               |
+| Edit mode      | Flux: 1 reference image; GPT Image 2: 10; Nano Banana 2: 14 |
+| Size overrides | Supported                                                   |
+| Aspect ratio   | Supported for generate and GPT Image 2/Nano Banana 2 edit   |
+| Resolution     | Supported                                                   |
+| Output format  | `png` or `jpeg`                                             |
+
+> **Note:** Flux image-to-image requests do **not** support `aspectRatio` overrides. GPT
+Image 2 and Nano Banana 2 edit requests use fal's `/edit` endpoint and accept
+aspect-ratio hints.
+
+
+Use `outputFormat: "png"` when you want PNG output. fal does not declare an
+explicit transparent-background control in OpenClaw, so `background:
+"transparent"` is reported as an ignored override for fal models.
+
+To use fal as the default image provider:
+
+```json5
+{
+  agents: {
+    defaults: {
+      imageGenerationModel: {
+        primary: "fal/fal-ai/flux/dev",
+      },
+    },
+  },
+}
+```
+
+## Video generation
+
+The bundled `fal` video-generation provider defaults to
+`fal/fal-ai/minimax/video-01-live`.
+
+| Capability | Value                                                              |
+| ---------- | ------------------------------------------------------------------ |
+| Modes      | Text-to-video, single-image reference, Seedance reference-to-video |
+| Runtime    | Queue-backed submit/status/result flow for long-running jobs       |
+
+### Available video models
+
+**HeyGen video-agent:**
+
+    - `fal/fal-ai/heygen/v2/video-agent`
+
+    **Seedance 2.0:**
+
+    - `fal/bytedance/seedance-2.0/fast/text-to-video`
+    - `fal/bytedance/seedance-2.0/fast/image-to-video`
+    - `fal/bytedance/seedance-2.0/fast/reference-to-video`
+    - `fal/bytedance/seedance-2.0/text-to-video`
+    - `fal/bytedance/seedance-2.0/image-to-video`
+    - `fal/bytedance/seedance-2.0/reference-to-video`
+
+  ### Seedance 2.0 config example
+
+```json5
+    {
+      agents: {
+        defaults: {
+          videoGenerationModel: {
+            primary: "fal/bytedance/seedance-2.0/fast/text-to-video",
+          },
+        },
+      },
+    }
+    ```
+  ### Seedance 2.0 reference-to-video config example
+
+```json5
+    {
+      agents: {
+        defaults: {
+          videoGenerationModel: {
+            primary: "fal/bytedance/seedance-2.0/fast/reference-to-video",
+          },
+        },
+      },
+    }
+    ```
+
+    Reference-to-video accepts up to 9 images, 3 videos, and 3 audio references
+    through the shared `video_generate` `images`, `videos`, and `audioRefs`
+    parameters, with at most 12 total reference files.
+
+  ### HeyGen video-agent config example
+
+```json5
+    {
+      agents: {
+        defaults: {
+          videoGenerationModel: {
+            primary: "fal/fal-ai/heygen/v2/video-agent",
+          },
+        },
+      },
+    }
+    ```
+  > **Note:** Use `openclaw models list --provider fal` to see the full list of available fal
+models, including any recently added entries.
+
+
+## Related
+
+**Image generation:** Shared image tool parameters and provider selection.
+  
+
+**Video generation:** Shared video tool parameters and provider selection.
+  
+
+**Configuration reference:** Agent defaults including image and video model selection.
+  
+
